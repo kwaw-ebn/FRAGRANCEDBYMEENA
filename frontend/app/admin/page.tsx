@@ -99,8 +99,8 @@ export default function Admin() {
   if (!token)
     return (
       <main className="section narrow">
-        <a className="wordmark" href="/">
-          Fragranced<span>BY MEENA</span>
+        <a className="wordmark brand-logo" href="/">
+          <img src="/fragrancedbymeena-logo.webp" alt="FragrancedByMeena logo" width="150" height="122" />
         </a>
         <h1 style={{ marginTop: 60 }}>Store management</h1>
         <p>Sign in to manage your catalogue and orders.</p>

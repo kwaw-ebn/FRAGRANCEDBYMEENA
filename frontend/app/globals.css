@@ -1220,3 +1220,10 @@ footer {
     padding: 15px;
   }
 }
+
+/* Supplied brand logo, with whitespace trimmed without changing the artwork. */
+.brand-logo{display:inline-flex;align-items:center;flex-shrink:0;line-height:0;}
+.brand-logo img{display:block;width:112px;height:80px;object-fit:contain;mix-blend-mode:multiply;}
+footer .brand-logo img{width:150px;height:122px;}
+.narrow>.brand-logo img{width:150px;height:122px;}
+@media(max-width:550px){header .brand-logo img{width:90px;height:65px;}}

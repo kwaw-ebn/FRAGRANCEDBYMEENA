@@ -344,8 +344,8 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
           "Carefully selected scents • Personal fragrance assistance • Ghana"}
       </div>
       <header>
-        <a className="wordmark" href="/">
-          Fragranced<span>BY MEENA</span>
+        <a className="wordmark brand-logo" href="/">
+          <img src="/fragrancedbymeena-logo.webp" alt="FragrancedByMeena logo" width="150" height="122" />
         </a>
         <nav className={mobile ? "open" : ""}>
           {[
@@ -1199,8 +1199,8 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
       <footer>
         <div className="footer-top">
           <div>
-            <a className="wordmark" href="/">
-              Fragranced<span>BY MEENA</span>
+            <a className="wordmark brand-logo" href="/">
+              <img src="/fragrancedbymeena-logo.webp" alt="FragrancedByMeena logo" width="150" height="122" />
             </a>
             <p>
               Every mood. Every moment.
