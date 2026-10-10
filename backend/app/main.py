@@ -101,6 +101,47 @@ async def lifespan(app):
             for name in ['Affection Gift Set','Lattafa 5-in-1 Set','Vintage Radio Gift Set']: db.add(Product(name=name,slug=slug(name),brand='LATTAFA',category='Gift Sets'))
             for kind,names in [('brand',BRANDS),('category',CATEGORIES)]:
                 for name in names: db.add(Taxonomy(kind=kind,name=name))
+        # Owner-confirmed Ghana cedi prices (October 2026). Keep stock unchanged.
+        # Reapply on startup so prices reach existing persistent database records.
+        confirmed_prices = {
+            "AFNAN|9PM": 500, "AFNAN|9PM Elixir": 450,
+            "AFNAN|9PM Night Out": 600,
+            "LATTAFA|Affection Gift Set": 450,
+            "LATTAFA|Angham": 380, "LATTAFA|Angham Second Song": 380,
+            "BATH & BODY WORKS|Book Loft": 160,
+            "KHADLAJ|Café Latte": 300,
+            "ARMAF|Club de Nuit Intense Man EDP": 500,
+            "ARMAF|Club de Nuit Intense Man Limited Edition": 1100,
+            "ARMAF|Club de Nuit Sillage": 600,
+            "BATH & BODY WORKS|Cucumber Melon": 160,
+            "BATH & BODY WORKS|Dream Bright": 160,
+            "BATH & BODY WORKS|Dressed in White": 160,
+            "LATTAFA|Eclaire": 400, "LATTAFA|Fakhar Rose": 300,
+            "RAYHAAN|Floriana": 330, "KHADLAJ|Fursan White": 290,
+            "BATH & BODY WORKS|Gingham Gorgeous": 160,
+            "LATTAFA|Honor & Glory": 350, "LATTAFA|Khamrah": 450,
+            "LATTAFA|Khamrah Qahwa": 450, "LATTAFA|Mayar": 300,
+            "BATH & BODY WORKS|Midnight Addiction": 160,
+            "LATTAFA|Nebras": 430, "LATTAFA|Oud for Glory": 350,
+            "BATH & BODY WORKS|Pink Obsessed": 160,
+            "LATTAFA|Qaed Al Fursan Unlimited": 260,
+            "LATTAFA|Qimmah": 250,
+            "RAYHAAN|Rayhaan Aquatica": 350,
+            "RAYHAAN|Rayhaan Obsidian": 400,
+            "RAYHAAN|Rayhaan Terra": 350,
+            "AFNAN|Supremacy Collector’s Edition": 790,
+            "AFNAN|Supremacy in Oud": 760,
+            "LATTAFA|Tharwah Gold": 400,
+            "BATH & BODY WORKS|Vanilla Romance": 160,
+            "LATTAFA|Vintage Radio Gift Set": 500,
+            "BATH & BODY WORKS|Warm Vanilla": 160,
+            "BATH & BODY WORKS|You’re The One": 160,
+        }
+        for product in db.scalars(select(Product)):
+            key = f"{product.brand}|{product.name}"
+            if key in confirmed_prices:
+                product.price = Decimal(str(confirmed_prices[key]))
+        db.flush()
         # Match uploaded photos to existing catalogue records on each startup.
         # Never alter prices or stock quantities.
         photo_map={"ZARA|Rose Gourmand":["zara-rose-gourmand","zara-rose-gourmand-duo","zara-rose-gourmand-additional"],"ZARA|Red Temptation Elixir":["zara-red-temptation-elixir"],"LATTAFA|Eclaire":["lattafa-eclaire"],"LATTAFA|Fakhar Rose":["lattafa-fakhar-rose"],"LATTAFA|Honor & Glory":["lattafa-honor-and-glory"],"LATTAFA|Khamrah Qahwa":["lattafa-khamrah-qahwa"],"LATTAFA|Nebras":["lattafa-nebras-bottle","lattafa-nebras-packaging"],"LATTAFA|Qaed Al Fursan Unlimited":["lattafa-qaed-al-fursan-unlimited"],"LATTAFA|Qimmah":["lattafa-qimmah-for-women"],"KHADLAJ|Café Latte":["khadlaj-cafe-latte"],"RAYHAAN|Floriana":["rayhaan-floriana"],"BATH & BODY WORKS|Dream Bright":["bath-body-works-dream-bright"],"BATH & BODY WORKS|Midnight Addiction":["bath-body-works-midnight-addiction"],"BATH & BODY WORKS|Vanilla Romance":["bath-body-works-vanilla-romance"],"BATH & BODY WORKS|Warm Vanilla":["bath-body-works-warm-vanilla-sugar"],"BATH & BODY WORKS|You’re The One":["bath-body-works-youre-the-one"]}
