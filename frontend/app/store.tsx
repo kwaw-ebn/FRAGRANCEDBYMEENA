@@ -433,7 +433,7 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
               <div className="hero-art">
                 {true ? (
                   <img
-                    src="/fragrancedbymeena-founder-luxury-perfume-ghana-homepage.webp"
+                    src="/products/fragrancedbymeena-founder-luxury-perfume-ghana-homepage.webp"
                     alt="FragrancedByMeena founder presenting luxury perfumes in Ghana"
                   />
                 ) : (
