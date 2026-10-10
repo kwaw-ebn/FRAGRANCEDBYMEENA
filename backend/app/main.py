@@ -101,11 +101,15 @@ async def lifespan(app):
             for name in ['Affection Gift Set','Lattafa 5-in-1 Set','Vintage Radio Gift Set']: db.add(Product(name=name,slug=slug(name),brand='LATTAFA',category='Gift Sets'))
             for kind,names in [('brand',BRANDS),('category',CATEGORIES)]:
                 for name in names: db.add(Taxonomy(kind=kind,name=name))
-        photo_map={'Khamrah Qahwa':'lattafa-khamrah-qahwa','Rose Gourmand':'zara-rose-gourmand','Red Temptation Elixir':'zara-red-temptation-elixir','Cherry Temptation':'zara-cherry-temptation-hibiscus','Hibiscus':'zara-cherry-temptation-hibiscus'}
-        for name,image in (photo_map.items() if os.getenv('INCLUDE_REFERENCE_IMAGES')=='true' else []):
-            p=db.scalar(select(Product).where(Product.name==name))
-            if p and not p.images:
-                p.images=['/products/'+image+'.webp'];p.alt=name+' fragrance supplied by FragrancedByMeena'
+        # Match uploaded photos to existing catalogue records on each startup.
+        # Never alter prices or stock quantities.
+        photo_map={"ZARA|Rose Gourmand":["zara-rose-gourmand","zara-rose-gourmand-duo","zara-rose-gourmand-additional"],"ZARA|Red Temptation Elixir":["zara-red-temptation-elixir"],"LATTAFA|Eclaire":["lattafa-eclaire"],"LATTAFA|Fakhar Rose":["lattafa-fakhar-rose"],"LATTAFA|Honor & Glory":["lattafa-honor-and-glory"],"LATTAFA|Khamrah Qahwa":["lattafa-khamrah-qahwa"],"LATTAFA|Nebras":["lattafa-nebras-bottle","lattafa-nebras-packaging"],"LATTAFA|Qaed Al Fursan Unlimited":["lattafa-qaed-al-fursan-unlimited"],"LATTAFA|Qimmah":["lattafa-qimmah-for-women"],"KHADLAJ|Café Latte":["khadlaj-cafe-latte"],"RAYHAAN|Floriana":["rayhaan-floriana"],"BATH & BODY WORKS|Dream Bright":["bath-body-works-dream-bright"],"BATH & BODY WORKS|Midnight Addiction":["bath-body-works-midnight-addiction"],"BATH & BODY WORKS|Vanilla Romance":["bath-body-works-vanilla-romance"],"BATH & BODY WORKS|Warm Vanilla":["bath-body-works-warm-vanilla-sugar"],"BATH & BODY WORKS|You’re The One":["bath-body-works-youre-the-one"]}
+        for key, filenames in photo_map.items():
+            brand, name = key.split('|', 1)
+            p = db.scalar(select(Product).where(Product.brand == brand, Product.name == name))
+            if p:
+                p.images = ['/products/' + filename + '.webp' for filename in filenames]
+                p.alt = brand + ' ' + name + ' perfume at FragrancedByMeena Ghana'
         email,pw=os.getenv('INITIAL_ADMIN_EMAIL'),os.getenv('INITIAL_ADMIN_PASSWORD')
         if email and pw and not db.scalar(select(User).where(User.email==email.lower())):
             if len(pw)<12: raise RuntimeError('Initial admin password must be at least 12 characters')
