@@ -431,10 +431,10 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
                 </span>
               </div>
               <div className="hero-art">
-                {settings.at(-1)?.hero_image ? (
+                {true ? (
                   <img
-                    src={settings.at(-1)?.hero_image}
-                    alt="FragrancedByMeena fragrance collection"
+                    src="/fragrancedbymeena-founder-luxury-perfume-ghana-homepage.webp"
+                    alt="FragrancedByMeena founder presenting luxury perfumes in Ghana"
                   />
                 ) : (
                   <>
