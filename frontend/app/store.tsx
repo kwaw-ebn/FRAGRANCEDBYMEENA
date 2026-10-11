@@ -411,7 +411,7 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
               >
                 <img
                   className="hero-banner-image"
-                  src="/fragrancedbymeena-lattafa-khamrah-homepage-banner.png"
+                  src="/fragrancedbymeena-lattafa-khamrah-homepage-banner.png?v=20261011-khamrah-refresh"
                   alt="FragrancedByMeena luxury fragrance collection featuring Lattafa Khamrah perfume in Ghana"
                   width={1408}
                   height={1072}
