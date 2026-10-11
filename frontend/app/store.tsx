@@ -688,10 +688,12 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
           <section className="section narrow">
             <span className="eyebrow">A LITTLE LUXURY, ALL YOURS</span>
             <h1>Your shopping bag</h1>
+            <p className="checkout-steps">1. Shop <span>→</span> <strong>2. Review cart</strong> <span>→</span> 3. Guest checkout <span>→</span> 4. Order confirmation</p>
             {cart.length ? (
               <>
                 {cart.map((l) => (
                   <div className="cart-line" key={l.product.id}>
+                    {l.product.images[0] && <img className="cart-thumbnail" src={l.product.images[0]} alt={l.product.alt || l.product.name} loading="lazy" />}
                     <div>
                       <small>{l.product.brand}</small>
                       <h3>{l.product.name}</h3>
@@ -757,7 +759,9 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
         ) : view === "checkout" ? (
           <section className="section narrow">
             <span className="eyebrow">YOUR ORDER, MADE SIMPLE</span>
-            <h1>Checkout</h1>
+            <h1>Guest checkout</h1>
+            <p className="checkout-steps">1. Shop <span>→</span> 2. Review cart <span>→</span> <strong>3. Your details</strong> <span>→</span> 4. Order confirmation</p>
+            <p>No account needed. Enter your contact and delivery details to request your order.</p>
             <div className="notice">
               Online payment activation is in progress. Please use WhatsApp to
               confirm your order.
@@ -841,7 +845,9 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
                   Order / delivery instructions
                   <textarea name="instructions" />
                 </label>
-                <h3>3. Payment</h3>
+                <h3>3. Review your order</h3>
+                <div className="checkout-order-list">{cart.map((l) => <div className="checkout-order-line" key={l.product.id}><span>{l.product.name} × {l.quantity}</span><strong>{money((l.product.price || 0) * l.quantity)}</strong></div>)}</div>
+                <h3>4. Payment arrangements</h3>
                 <div className="payment-options">
                   <div>
                     Mobile Money{" "}
@@ -875,6 +881,7 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
           <section className="section narrow">
             <span className="eyebrow">THANK YOU FOR CHOOSING MEENA</span>
             <h1>Your order request is received.</h1>
+            <p className="checkout-steps">1. Shop <span>→</span> 2. Cart <span>→</span> 3. Checkout <span>→</span> <strong>4. Order received</strong></p>
             <p>
               Reference: <strong>{order.reference}</strong>
             </p>
