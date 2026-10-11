@@ -403,51 +403,21 @@ function Shop({ initialProduct }: { initialProduct?: Product }) {
       <main>
         {view === "home" ? (
           <>
-            <section className="hero">
-              <div className="hero-copy">
-                <span className="eyebrow">THE ART OF EVERYDAY LUXURY</span>
-                <h1>
-                  Your signature
-                  <br />
-                  scent starts <em>here.</em>
-                </h1>
-                <p>
-                  For every mood. Every moment. Every version of you. Discover a
-                  world of carefully selected fragrances at FragrancedByMeena.
-                </p>
-                <div className="buttons">
-                  <button className="primary" onClick={() => go("shop")}>
-                    EXPLORE THE COLLECTION <ArrowUpRight size={17} />
-                  </button>
-                  <button
-                    className="text-button"
-                    onClick={() => go("collections")}
-                  >
-                    Find your fragrance →
-                  </button>
-                </div>
-                <span className="hero-foot">
-                  PERFUMES · HOME FRAGRANCE · GIFT SETS
-                </span>
-              </div>
-              <div className="hero-art">
-                {true ? (
-                  <img
-                    src="/products/fragrancedbymeena-founder-luxury-perfume-ghana-homepage.webp"
-                    alt="FragrancedByMeena founder presenting luxury perfumes in Ghana"
-                  />
-                ) : (
-                  <>
-                    <div className="arch" />
-                    <Bottle />
-                    <div className="hero-caption">
-                      A little luxury.
-                      <br />
-                      <em>A lasting impression.</em>
-                    </div>
-                  </>
-                )}
-              </div>
+            <section className="hero-banner-section" aria-label="FragrancedByMeena luxury perfume collection">
+              <button
+                className="hero-banner-link"
+                onClick={() => go("shop")}
+                aria-label="Shop the FragrancedByMeena perfume collection"
+              >
+                <img
+                  className="hero-banner-image"
+                  src="/fragrancedbymeena-lattafa-khamrah-homepage-banner.png"
+                  alt="FragrancedByMeena luxury fragrance collection featuring Lattafa Khamrah perfume in Ghana"
+                  width={1408}
+                  height={1072}
+                  fetchPriority="high"
+                />
+              </button>
             </section>
             <section className="section">
               <div className="section-head">
