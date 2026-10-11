@@ -1227,3 +1227,9 @@ footer {
 footer .brand-logo img{width:150px;height:122px;}
 .narrow>.brand-logo img{width:150px;height:122px;}
 @media(max-width:550px){header .brand-logo img{width:90px;height:65px;}}
+
+/* Full-width campaign hero: preserve all artwork and embedded text */
+.hero-banner-section{width:100%;background:#e8d4c0;}
+.hero-banner-link{display:block;width:100%;padding:0;border:0;background:transparent;cursor:pointer;line-height:0;}
+.hero-banner-image{display:block;width:100%;height:auto;object-fit:contain;}
+.hero-banner-link:focus-visible{outline:3px solid #795133;outline-offset:-3px;}
