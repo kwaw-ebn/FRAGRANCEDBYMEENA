@@ -1233,3 +1233,12 @@ footer .brand-logo img{width:150px;height:122px;}
 .hero-banner-link{display:block;width:100%;padding:0;border:0;background:transparent;cursor:pointer;line-height:0;}
 .hero-banner-image{display:block;width:100%;height:auto;object-fit:contain;}
 .hero-banner-link:focus-visible{outline:3px solid #795133;outline-offset:-3px;}
+
+/* Clear, mobile-friendly e-commerce shopping journey */
+.checkout-steps{display:flex;flex-wrap:wrap;align-items:center;gap:9px;color:#776456;font-size:13px;line-height:1.6;margin:15px 0 26px;}
+.checkout-steps strong{color:#4b3024;}
+.cart-thumbnail{width:78px;height:94px;object-fit:contain;background:#f5eee7;border-radius:6px;flex-shrink:0;}
+.checkout-order-list{border:1px solid #e4d7cb;padding:15px 20px;margin:18px 0 26px;background:#fcfaf7;}
+.checkout-order-line{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #eee5dd;}
+.checkout-order-line:last-child{border-bottom:0;}
+@media(max-width:600px){.cart-thumbnail{width:58px;height:72px}.checkout-steps{font-size:12px;gap:6px}.checkout-order-line{font-size:13px}}
