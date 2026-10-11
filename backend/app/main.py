@@ -148,12 +148,13 @@ async def lifespan(app):
         photo_map["ZARA|Hibiscus"] = ["zara-hibiscus-bloom-collection-perfume-ghana"]
         photo_map["KHADLAJ|Fursan White"] = ["lattafa-fursan-white-perfume-ghana"]
         photo_map["ZARA|Bogoss Vibrant Leather Fire"] = ["zara-bogoss-vibrant-leather-fire-perfume-ghana"]
+        photo_map["LATTAFA|Khamrah"] = ["lattafa_khamrah"]
         photo_map.update({"ZARA|Cherry Temptation":["zara-cherry-temptation-perfume-ghana"],"ZARA|Wonder Rose":["zara-wonder-rose-perfume-ghana"],"ZARA|Tobacco Duo":["zara-tobacco-collection-duo-ghana","zara-tobacco-collection-perfume-ghana"],"ZARA|Vibrant Leather":["zara-vibrant-leather-perfume-ghana"],"AFNAN|9PM":["afnan-9pm-perfume-ghana","afnan-9pm-perfume-ghana-view-2"],"AFNAN|9PM Elixir":["afnan-9pm-elixir-perfume-ghana"],"AFNAN|9PM Night Out":["afnan-9pm-night-out-perfume-ghana"],"AFNAN|Supremacy Collector’s Edition":["afnan-supremacy-collectors-edition-perfume-ghana"],"ARMAF|Club de Nuit Sillage":["armaf-club-de-nuit-sillage-perfume-ghana"],"ARMAF|Club de Nuit Intense Man Limited Edition":["armaf-club-de-nuit-intense-man-limited-edition-ghana"],"ARMAF|Club de Nuit Intense Man EDP":["armaf-club-de-nuit-intense-man-perfume-ghana"],"LATTAFA|Affection Gift Set":["lattafa-affection-gift-set-ghana"],"LATTAFA|Oud for Glory":["lattafa-oud-for-glory-perfume-ghana"],"LATTAFA|Mayar":["lattafa-mayar-perfume-ghana"],"RAYHAAN|Rayhaan Aquatica":["rayhaan-aquatica-perfume-ghana"],"RAYHAAN|Rayhaan Obsidian":["rayhaan-obsidian-perfume-ghana"],"RAYHAAN|Rayhaan Terra":["rayhaan-terra-perfume-ghana","rayhaan-terra-perfume-ghana-view-2","rayhaan-terra-perfume-ghana-view-3","rayhaan-terra-perfume-ghana-view-4"],"BATH & BODY WORKS|Cucumber Melon":["bath-body-works-cucumber-melon-body-mist-ghana"]})
         for key, filenames in photo_map.items():
             brand, name = key.split('|', 1)
             p = db.scalar(select(Product).where(Product.brand == brand, Product.name == name))
             if p:
-                p.images = ['/products/' + filename + ('.jpg' if filename == 'zara-bogoss-vibrant-leather-fire-perfume-ghana' else '.webp') for filename in filenames]
+                p.images = ['/products/' + filename + ('.jpg' if filename in ('zara-bogoss-vibrant-leather-fire-perfume-ghana', 'lattafa_khamrah') else '.webp') for filename in filenames]
                 p.alt = brand + ' ' + name + ' perfume at FragrancedByMeena Ghana'
         email,pw=os.getenv('INITIAL_ADMIN_EMAIL'),os.getenv('INITIAL_ADMIN_PASSWORD')
         if email and pw and not db.scalar(select(User).where(User.email==email.lower())):
